@@ -79,7 +79,7 @@ select.sutra-select{
 
 /* ── SUTRA DISPLAY CARD ── */
 .sutra-image-card{
-  width:100%;min-height:100px;
+  width:100%;min-height:160px;
   background:linear-gradient(135deg,rgba(255,248,220,.9),rgba(245,225,150,.45));
   border:1px dashed rgba(201,150,12,.4);border-radius:4px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -92,7 +92,7 @@ select.sutra-select{
 .upload-hint{font-size:11px;font-weight:300;letter-spacing:.25em;color:var(--text-light);}
 .upload-sub{font-size:10px;color:var(--text-light);opacity:.7;letter-spacing:.2em;}
 #uploadInput{display:none;}
-#uploadedImg{display:none;width:100%;max-height:160px;object-fit:contain;padding:8px;}
+#uploadedImg{display:none;width:100%;max-height:240px;object-fit:contain;padding:10px;}
 .sutra-image-card.has-image .upload-icon,
 .sutra-image-card.has-image .upload-hint,
 .sutra-image-card.has-image .upload-sub{display:none;}
@@ -175,18 +175,9 @@ select.sutra-select{
   width:6px;height:6px;background:var(--gold-bright);border-radius:50%;
   box-shadow:0 0 4px var(--gold-bright);
 }
-.bead-row{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:260px;margin-top:2px;}
-.bead-dot{width:7px;height:7px;border-radius:50%;border:1px solid rgba(201,150,12,.3);background:transparent;transition:all .25s ease;}
-.bead-dot.filled{background:var(--gold-mid);border-color:var(--gold-deep);box-shadow:0 0 3px rgba(201,150,12,.5);}
-.rounds-display{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(201,150,12,.06);border:1px solid rgba(201,150,12,.15);
-  padding:7px 18px;border-radius:2px;
-}
-.rounds-icon{width:15px;height:15px;border:1px solid var(--gold-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.rounds-icon::after{content:'';width:5px;height:5px;background:var(--gold-mid);border-radius:50%;}
-.rounds-text{font-size:12px;font-weight:300;color:var(--text-mid);letter-spacing:.2em;}
-.rounds-num{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-deep);}
+.bead-row{display:none;}
+.bead-dot{display:none;}
+.rounds-display{display:none;}
 
 /* ── TAP BUTTON ── */
 .tap-button-wrapper{
@@ -242,72 +233,131 @@ select.sutra-select{
 }
 .control-btn:hover{background:rgba(201,150,12,.07);border-color:rgba(201,150,12,.55);color:var(--text-mid);}
 .control-btn:active{background:rgba(201,150,12,.12);}
+.rounds-inline{
+  font-size:11px;font-weight:300;letter-spacing:.25em;color:var(--text-light);
+  text-align:center;
+}
+.rounds-inline span{
+  font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold-deep);
+}
 
 /* ── JOURNAL SECTION ── */
-.journal-section{
-  width:100%;padding:0 20px 4px;
-}
-.section-divider{
-  display:flex;align-items:center;gap:10px;margin-bottom:12px;
-}
+.journal-section{width:100%;padding:0 20px 4px;}
+.section-divider{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,150,12,.25));}
 .divider-line.right{background:linear-gradient(90deg,rgba(201,150,12,.25),transparent);}
 .section-label{font-size:10px;letter-spacing:.4em;color:var(--text-light);font-weight:300;white-space:nowrap;}
 
-.journal-card{
-  background:linear-gradient(135deg,rgba(255,248,220,.85),rgba(245,225,150,.35));
-  border:1px solid rgba(201,150,12,.2);border-radius:4px;
+/* Top row: streak hero + two small stat cards */
+.journal-top-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:8px;
+  margin-bottom:8px;
+}
+.streak-hero{
+  grid-row:1/3;
+  background:linear-gradient(145deg,#E8832A,#C45A10);
+  border-radius:10px;
+  padding:18px 14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;min-height:130px;
+  box-shadow:0 4px 16px rgba(180,80,20,.3);
+}
+.streak-hero-label{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.75);font-weight:300;}
+.streak-hero-num{
+  font-size:64px;font-weight:200;color:#fff;line-height:1;
+  font-family:'Cormorant Garamond',serif;
+  text-shadow:0 2px 12px rgba(255,200,100,.3);
+}
+.streak-hero-unit{font-size:13px;font-weight:300;color:rgba(255,255,255,.8);letter-spacing:.3em;}
+
+.stat-card{
+  background:var(--ivory);
+  border:1px solid rgba(201,150,12,.18);
+  border-radius:10px;
+  padding:12px 14px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 2px 8px var(--shadow-gold);
+}
+.stat-card-label{font-size:9px;letter-spacing:.18em;color:var(--text-light);font-weight:300;line-height:1.4;}
+.stat-card-label strong{display:block;font-size:10px;font-weight:400;color:var(--text-mid);}
+.stat-card-num{
+  font-size:32px;font-weight:300;
+  font-family:'Cormorant Garamond',serif;
+  line-height:1;
+}
+.stat-card-num.accent-red{color:#c0544a;}
+.stat-card-num.accent-gold{color:#C9960C;}
+.stat-card-unit{font-size:11px;font-weight:300;letter-spacing:.15em;}
+.stat-card-unit.accent-red{color:#c0544a;}
+.stat-card-unit.accent-gold{color:#C9960C;}
+
+/* Month stat cards row */
+.journal-mid-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;margin-bottom:8px;
+}
+.month-stat-card{
+  background:linear-gradient(135deg,#c0544a,#a03a35);
+  border-radius:10px;padding:14px 16px;
+  display:flex;flex-direction:column;gap:2px;
+  box-shadow:0 3px 12px rgba(160,58,53,.3);
+}
+.month-stat-card.blue{background:linear-gradient(135deg,#c0544a,#9b3f8a);}
+.month-stat-card-label{font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.7);font-weight:300;}
+.month-stat-card-num{
+  font-size:38px;font-weight:200;color:#fff;line-height:1;
+  font-family:'Cormorant Garamond',serif;
+}
+.month-stat-card-unit{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.2em;}
+
+/* Calendar */
+.journal-cal-card{
+  background:var(--ivory);
+  border:1px solid rgba(201,150,12,.18);border-radius:10px;
   padding:14px 16px;
   box-shadow:0 2px 8px var(--shadow-gold);
 }
-.journal-month{
-  font-size:11px;font-weight:300;letter-spacing:.3em;color:var(--text-light);
-  text-align:center;margin-bottom:10px;font-family:'Cormorant Garamond',serif;
-  font-style:italic;
+.journal-cal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
 }
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:4px;
+.journal-cal-month{
+  font-size:14px;font-weight:300;color:var(--text-dark);letter-spacing:.1em;
+  font-family:'Cormorant Garamond',serif;
 }
-.cal-header{
-  font-size:9px;letter-spacing:.1em;color:var(--text-light);
-  text-align:center;padding:2px 0;font-weight:300;
+.cal-nav{display:flex;gap:6px;}
+.cal-nav-btn{
+  background:none;border:none;cursor:pointer;
+  font-size:14px;color:var(--gold-mid);padding:2px 6px;
+  border-radius:2px;transition:background .15s;
+}
+.cal-nav-btn:hover{background:rgba(201,150,12,.1);}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cal-header-cell{
+  font-size:9px;letter-spacing:.05em;color:var(--text-light);
+  text-align:center;padding:3px 0 4px;font-weight:300;
 }
 .cal-day{
-  aspect-ratio:1;
-  display:flex;align-items:center;justify-content:center;
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:300;color:var(--text-light);
   font-family:'Cormorant Garamond',serif;
-  border-radius:50%;
-  position:relative;
-  transition:all .2s ease;
+  border-radius:50%;position:relative;transition:all .2s ease;
 }
-.cal-day.empty{opacity:0;}
-.cal-day.today{
-  color:var(--gold-deep);font-weight:400;
-}
+.cal-day.empty{opacity:0;pointer-events:none;}
+.cal-day.today{color:var(--gold-deep);font-weight:400;}
 .cal-day.today::after{
   content:'';position:absolute;bottom:1px;left:50%;transform:translateX(-50%);
   width:3px;height:3px;background:var(--gold-mid);border-radius:50%;
 }
 .cal-day.completed{
   background:var(--gold-mid);color:var(--gold-whisper);
-  box-shadow:0 0 6px rgba(201,150,12,.4);
-  font-weight:400;
+  box-shadow:0 0 5px rgba(201,150,12,.4);font-weight:400;
 }
-.cal-day.completed.today{
-  background:var(--gold-deep);
-}
+.cal-day.completed.today{background:var(--gold-deep);}
 .cal-day.completed.today::after{display:none;}
-
-.journal-stats{
-  display:flex;justify-content:center;gap:20px;margin-top:10px;
-  padding-top:10px;border-top:1px solid rgba(201,150,12,.12);
-}
-.stat-item{text-align:center;}
-.stat-num{font-size:20px;font-weight:300;color:var(--gold-deep);font-family:'Cormorant Garamond',serif;display:block;}
-.stat-label{font-size:9px;letter-spacing:.25em;color:var(--text-light);font-weight:300;}
 
 /* ── MODALS (shared base) ── */
 .modal-overlay{
@@ -413,11 +463,6 @@ select.sutra-select{
       <div class="progress-bar-track">
         <div class="progress-bar-fill" id="progressBar"></div>
       </div>
-      <div class="bead-row" id="beadRow"></div>
-    </div>
-    <div class="rounds-display">
-      <div class="rounds-icon"></div>
-      <div class="rounds-text">已圓滿&ensp;<span class="rounds-num" id="roundsNum">0</span>&ensp;輪</div>
     </div>
   </div>
 
@@ -430,6 +475,7 @@ select.sutra-select{
       <button class="control-btn" onclick="undoOne()">退 回 一 次</button>
       <button class="control-btn" onclick="askReset()">重 新 計 次</button>
     </div>
+    <div class="rounds-inline">已圓滿&ensp;<span id="roundsNum">0</span>&ensp;輪</div>
   </div>
 
   <!-- JOURNAL -->
@@ -439,20 +485,42 @@ select.sutra-select{
       <div class="section-label">持 誦 日 誌</div>
       <div class="divider-line right"></div>
     </div>
-    <div class="journal-card">
-      <div class="journal-month" id="journalMonth"></div>
-      <div class="calendar-grid" id="calendarGrid"></div>
-      <div class="journal-stats">
-        <div class="stat-item">
-          <span class="stat-num" id="statDays">0</span>
-          <span class="stat-label">本月持誦天數</span>
+
+    <!-- Streak hero + best streak cards -->
+    <div class="journal-top-row">
+      <div class="streak-hero">
+        <div class="streak-hero-label">目前連續紀錄</div>
+        <div class="streak-hero-num" id="statStreak">0</div>
+        <div class="streak-hero-unit">天</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">本月<strong>持誦天數</strong></div>
+        <div>
+          <span class="stat-card-num accent-red" id="statDays">0</span>
+          <span class="stat-card-unit accent-red"> 天</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num" id="statStreak">0</span>
-          <span class="stat-label">連續持誦天數</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">本月<strong>圓滿輪數</strong></div>
+        <div>
+          <span class="stat-card-num accent-gold" id="statRounds">0</span>
+          <span class="stat-card-unit accent-gold"> 輪</span>
         </div>
       </div>
     </div>
+
+    <!-- Calendar -->
+    <div class="journal-cal-card">
+      <div class="journal-cal-header">
+        <div class="journal-cal-month" id="journalMonth"></div>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+          <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
   </div>
 
 </div><!-- end page-wrap -->
@@ -495,6 +563,39 @@ function parseSutra(raw) {
 }
 
 const SUTRA_DATA = {
+  zhunti: {
+    title: '準提神咒',
+    cols: buildCols([
+      {b:'稽',r:'ㄐㄧ'},{b:'首',r:'ㄕㄡˇ'},{b:'皈',r:'ㄍㄨㄟ'},{b:'依',r:'ㄧ'},{b:'蘇',r:'ㄙㄨ'},{b:'悉',r:'ㄒㄧ'},{b:'帝',r:'ㄉㄧˋ'},
+      {p:'，'},
+      {b:'頭',r:'ㄊㄡˊ'},{b:'面',r:'ㄇㄧㄢˋ'},{b:'頂',r:'ㄉㄧㄥˇ'},{b:'禮',r:'ㄌㄧˇ'},{b:'七',r:'ㄑㄧ'},{b:'俱',r:'ㄐㄩ'},{b:'胝',r:'ㄓ'},
+      {p:'，'},
+      {b:'我',r:'ㄨㄛˇ'},{b:'今',r:'ㄐㄧㄣ'},{b:'稱',r:'ㄔㄥ'},{b:'讚',r:'ㄗㄢˋ'},{b:'大',r:'ㄉㄚˋ'},{b:'準',r:'ㄓㄨㄣˇ'},{b:'提',r:'ㄊㄧˊ'},
+      {p:'，'},
+      {b:'惟',r:'ㄨㄟˊ'},{b:'願',r:'ㄩㄢˋ'},{b:'慈',r:'ㄘˊ'},{b:'悲',r:'ㄅㄟ'},{b:'垂',r:'ㄔㄨㄟˊ'},{b:'加',r:'ㄐㄧㄚ'},{b:'護',r:'ㄏㄨˋ'},
+      {p:'。'},
+      {b:'南',r:'ㄋㄢˊ'},{b:'無',r:'ㄇㄛˊ'},{b:'颯',r:'ㄙㄚˋ'},{b:'哆',r:'ㄉㄨㄛ'},{b:'喃',r:'ㄋㄢˊ'},
+      {b:'三',r:'ㄙㄢ'},{b:'藐',r:'ㄇㄧㄠˇ'},{b:'三',r:'ㄙㄢ'},{b:'菩',r:'ㄆㄨˊ'},{b:'陀',r:'ㄊㄨㄛˊ'},
+      {b:'俱',r:'ㄐㄩ'},{b:'胝',r:'ㄓ'},{b:'喃',r:'ㄋㄢˊ'},
+      {p:'，'},
+      {b:'怛',r:'ㄉㄚˊ'},{b:'姪',r:'ㄓˊ'},{b:'他',r:'ㄊㄚ'},
+      {p:'，'},
+      {b:'唵',r:'ㄨㄥ'},
+      {p:'，'},
+      {b:'折',r:'ㄓㄜˊ'},{b:'戾',r:'ㄌㄧˋ'},{b:'主',r:'ㄓㄨˇ'},{b:'戾',r:'ㄌㄧˋ'},
+      {p:'，'},
+      {b:'準',r:'ㄓㄨㄣˇ'},{b:'提',r:'ㄊㄧˊ'},{b:'娑',r:'ㄙㄨㄛ'},{b:'婆',r:'ㄆㄛˊ'},{b:'訶',r:'ㄏㄜ'},
+      {p:'。'},
+      {b:'每',r:'ㄇㄟˇ'},{b:'天',r:'ㄊㄧㄢ'},{b:'持',r:'ㄔˊ'},{b:'誦',r:'ㄙㄨㄥˋ'},{b:'一',r:'ㄧ'},{b:'○',r:''},{b:'八',r:'ㄅㄚ'},{b:'遍',r:'ㄅㄧㄢˋ'},
+      {p:'，'},
+      {b:'可',r:'ㄎㄜˇ'},{b:'以',r:'ㄧˇ'},{b:'積',r:'ㄐㄧ'},{b:'福',r:'ㄈㄨˊ'},
+      {p:'，'},
+      {b:'改',r:'ㄍㄞˇ'},{b:'造',r:'ㄗㄠˋ'},{b:'命',r:'ㄇㄧㄥˋ'},{b:'運',r:'ㄩㄣˋ'},
+      {p:'，'},
+      {b:'得',r:'ㄉㄜˊ'},{b:'大',r:'ㄉㄚˋ'},{b:'富',r:'ㄈㄨˋ'},{b:'貴',r:'ㄍㄨㄟˋ'},{b:'、',r:''},{b:'大',r:'ㄉㄚˋ'},{b:'財',r:'ㄘㄞˊ'},{b:'富',r:'ㄈㄨˋ'},
+      {p:'。'},
+    ])
+  },
   xinjing: {
     title: '般若波羅蜜多心經',
     cols: buildCols([
@@ -726,19 +827,17 @@ function removeImage(e) {
 const TOTAL = 108;
 let count = 0, rounds = 0, history = [];
 
-/* ── BEAD DOTS ── */
-const beadRow = document.getElementById('beadRow');
-const BEAD_COUNT = 18;
-const beads = [];
-for (let i = 0; i < BEAD_COUNT; i++) {
-  const d = document.createElement('div');
-  d.className = 'bead-dot';
-  beadRow.appendChild(d);
-  beads.push(d);
-}
-
 /* ── STORAGE KEY ── */
 const STORE_KEY = 'chanting_journal_v1';
+let journalViewYear = new Date().getFullYear();
+let journalViewMonth = new Date().getMonth();
+
+function changeMonth(delta) {
+  journalViewMonth += delta;
+  if (journalViewMonth > 11) { journalViewMonth = 0; journalViewYear++; }
+  if (journalViewMonth < 0)  { journalViewMonth = 11; journalViewYear--; }
+  renderJournal();
+}
 
 function loadJournal() {
   try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
@@ -753,7 +852,8 @@ function todayKey() {
 }
 function markTodayComplete() {
   const j = loadJournal();
-  j[todayKey()] = true;
+  const k = todayKey();
+  j[k] = (j[k] || 0) + 1;  // store rounds count per day
   saveJournal(j);
   renderJournal();
 }
@@ -765,8 +865,6 @@ function updateUI() {
   document.getElementById('progressCurrent').textContent = bead;
   document.getElementById('roundsNum').textContent = rounds;
   document.getElementById('progressBar').style.width = (bead / TOTAL * 100) + '%';
-  const step = TOTAL / BEAD_COUNT;
-  beads.forEach((b, i) => b.classList.toggle('filled', bead > i * step));
 }
 
 /* ── TAP ── */
@@ -819,61 +917,55 @@ function continueNext() {
 /* ── JOURNAL CALENDAR ── */
 function renderJournal() {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth(); // 0-based
-  const todayDate = now.getDate();
+  const year = journalViewYear;
+  const month = journalViewMonth;
+  const todayDate = (now.getFullYear() === year && now.getMonth() === month) ? now.getDate() : -1;
   const j = loadJournal();
 
-  // Month label
-  const monthNames = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
-  document.getElementById('journalMonth').textContent = `${year} 年　${monthNames[month]}`;
+  const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('journalMonth').textContent = `${year} 年 ${monthNames[month]}`;
 
-  // Day of week headers
-  const days = ['日','一','二','三','四','五','六'];
   const grid = document.getElementById('calendarGrid');
   grid.innerHTML = '';
-  days.forEach(d => {
+
+  // Week headers
+  ['日','一','二','三','四','五','六'].forEach(d => {
     const h = document.createElement('div');
-    h.className = 'cal-header';
+    h.className = 'cal-header-cell';
     h.textContent = d;
     grid.appendChild(h);
   });
 
-  // First day of month
-  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+  const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month+1, 0).getDate();
 
-  // Empty cells
   for (let i = 0; i < firstDay; i++) {
     const e = document.createElement('div');
-    e.className = 'cal-day empty';
-    grid.appendChild(e);
+    e.className = 'cal-day empty'; grid.appendChild(e);
   }
 
-  // Day cells
-  let completedCount = 0;
+  let completedDays = 0, monthRounds = 0;
   for (let d = 1; d <= daysInMonth; d++) {
     const key = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const done = !!j[key];
-    if (done) completedCount++;
+    const val = j[key];
+    const done = val && val > 0;
+    if (done) { completedDays++; monthRounds += (typeof val === 'number' ? val : 1); }
     const cell = document.createElement('div');
     cell.className = 'cal-day' + (done ? ' completed' : '') + (d === todayDate ? ' today' : '');
     cell.textContent = d;
     grid.appendChild(cell);
   }
 
-  // Stats
-  document.getElementById('statDays').textContent = completedCount;
+  document.getElementById('statDays').textContent = completedDays;
+  document.getElementById('statRounds').textContent = monthRounds;
 
-  // Streak: count consecutive days ending today
+  // Streak (always based on today, not view month)
   let streak = 0;
   const checkDate = new Date(now);
   while (true) {
     const k = `${checkDate.getFullYear()}-${String(checkDate.getMonth()+1).padStart(2,'0')}-${String(checkDate.getDate()).padStart(2,'0')}`;
-    if (j[k]) {
-      streak++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else break;
+    if (j[k] && j[k] > 0) { streak++; checkDate.setDate(checkDate.getDate()-1); }
+    else break;
   }
   document.getElementById('statStreak').textContent = streak;
 }
